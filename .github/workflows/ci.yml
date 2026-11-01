@@ -1,0 +1,24 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # GTM templates only run inside Tag Manager, so CI checks the gallery requirements: section markers and metadata.yaml.
+      - name: Template structure
+        run: |
+          for f in template.tpl server-template.tpl; do
+            for s in ___TERMS_OF_SERVICE___ ___INFO___ ___TEMPLATE_PARAMETERS___ ___TESTS___ ___NOTES___; do
+              grep -q "^$s\$" "$f" || { echo "$f is missing $s"; exit 1; }
+            done
+          done
+          grep -q '^___SANDBOXED_JS_FOR_WEB_TEMPLATE___$' template.tpl
+          grep -q '^___SANDBOXED_JS_FOR_SERVER___$' server-template.tpl
+      - name: Gallery metadata
+        run: grep -q '^homepage:' metadata.yaml && grep -q '^versions:' metadata.yaml && test -f LICENSE

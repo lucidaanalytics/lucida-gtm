@@ -1,0 +1,5 @@
+# Community Template Gallery metadata. Each `versions` entry is the commit of this repo that carried a template.tpl
+# release; sync.sh --push appends it after the sync commit (the gallery reads template.tpl at that sha).
+homepage: "https://github.com/lucidaanalytics/lucida-gtm"
+documentation: "https://github.com/lucidaanalytics/lucida-gtm#readme"
+versions: []
