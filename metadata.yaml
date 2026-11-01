@@ -2,4 +2,6 @@
 # release; sync.sh --push appends it after the sync commit (the gallery reads template.tpl at that sha).
 homepage: "https://github.com/lucidaanalytics/lucida-gtm"
 documentation: "https://github.com/lucidaanalytics/lucida-gtm#readme"
-versions: []
+versions:
+  - sha: 3bf728bb872647ecc2aa4a4ff15cd251dae6c4f3
+    changeNotes: Synced from lucida@02c4144d
