@@ -67,7 +67,7 @@ The server container is not visible to browsers, so a secret key is fine there.
 
 ## Known gap
 
-The template loads `@lucida/browser`'s classic-script build, `dist/lucida.js` (`src/snippet.ts`):
+The template loads `@lucida-analytics/browser`'s classic-script build, `dist/lucida.js` (`src/snippet.ts`):
 it drains `window.lucidaQueue` and then runs later pushes immediately. Host it at the snippet URL.
 
 ## Check
