@@ -63,7 +63,7 @@ ___TEMPLATE_PARAMETERS___
     "name": "apiHost",
     "displayName": "Ingest host",
     "simpleValueType": true,
-    "defaultValue": "https://ingest.lucida.dev",
+    "defaultValue": "https://capture.lucidace.com",
     "valueValidators": [
       {"type": "REGEX", "args": ["^https://.+"]}
     ],
@@ -76,7 +76,7 @@ ___TEMPLATE_PARAMETERS___
     "name": "scriptUrl",
     "displayName": "Snippet URL",
     "simpleValueType": true,
-    "defaultValue": "https://cdn.lucida.dev/lucida.js",
+    "defaultValue": "https://lucidace.com/lucida.js",
     "valueValidators": [
       {"type": "REGEX", "args": ["^https://cdn\\.lucida\\.dev/.+"]}
     ],
@@ -307,7 +307,7 @@ ___WEB_PERMISSIONS___
           "value": {
             "type": 2,
             "listItem": [
-              {"type": 1, "string": "https://cdn.lucida.dev/*"}
+              {"type": 1, "string": "https://lucidace.com/*"}
             ]
           }
         }
@@ -406,7 +406,7 @@ scenarios:
   code: |-
     mock('createQueue', function(name) { return function(cmd) {}; });
     mock('injectScript', function(url, onSuccess) { onSuccess(); });
-    runCode({tagType: 'init', apiKey: 'lc_pk_test', apiHost: 'https://ingest.lucida.dev', scriptUrl: 'https://cdn.lucida.dev/lucida.js', capturePageview: 'history', persistence: 'cookie'});
+    runCode({tagType: 'init', apiKey: 'lc_pk_test', apiHost: 'https://capture.lucidace.com', scriptUrl: 'https://lucidace.com/lucida.js', capturePageview: 'history', persistence: 'cookie'});
     assertApi('gtmOnSuccess').wasCalled();
 
 
