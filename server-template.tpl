@@ -41,7 +41,7 @@ ___TEMPLATE_PARAMETERS___
     "name": "apiHost",
     "displayName": "Ingest host",
     "simpleValueType": true,
-    "defaultValue": "https://ingest.lucida.dev",
+    "defaultValue": "https://capture.lucidace.com",
     "valueValidators": [{"type": "NON_EMPTY"}]
   },
   {
@@ -193,7 +193,7 @@ scenarios:
       return {event_name: 'page_view', client_id: 'c1', page_location: 'https://shop.example/a', ip_override: '1.2.3.4', 'x-ga-mp2-seg': '1', $lc_x: 'no'};
     });
     mock('sendHttpRequest', function(url, cb, opts, body) {
-      assertThat(url).isEqualTo('https://ingest.lucida.dev/v1/s2s/batch');
+      assertThat(url).isEqualTo('https://capture.lucidace.com/v1/s2s/batch');
       const ev = JSON.parse(body).batch[0];
       assertThat(ev.event).isEqualTo('$pageview');
       assertThat(ev.distinct_id).isEqualTo('c1');
@@ -203,13 +203,13 @@ scenarios:
       assertThat(ev.properties['x-ga-mp2-seg']).isUndefined();
       cb(200);
     });
-    runCode({apiKey: 'lc_sk_test', apiHost: 'https://ingest.lucida.dev/', forwardAll: true, sendIp: false});
+    runCode({apiKey: 'lc_sk_test', apiHost: 'https://capture.lucidace.com/', forwardAll: true, sendIp: false});
     assertApi('gtmOnSuccess').wasCalled();
 - name: User id wins, public key uses batch, IP only when enabled
   code: |-
     mock('getAllEventData', function() { return {event_name: 'purchase', client_id: 'c1', user_id: 'u9', ip_override: '1.2.3.4', value: 10}; });
     mock('sendHttpRequest', function(url, cb, opts, body) {
-      assertThat(url).isEqualTo('https://ingest.lucida.dev/v1/batch');
+      assertThat(url).isEqualTo('https://capture.lucidace.com/v1/batch');
       const ev = JSON.parse(body).batch[0];
       assertThat(ev.distinct_id).isEqualTo('u9');
       assertThat(ev.event).isEqualTo('order_completed');
@@ -218,12 +218,12 @@ scenarios:
       assertThat(ev.properties.plan).isEqualTo('pro');
       cb(202);
     });
-    runCode({apiKey: 'lc_pk_test', apiHost: 'https://ingest.lucida.dev', eventName: 'order_completed', forwardAll: false, sendIp: true, extraProps: [{name: 'plan', value: 'pro'}]});
+    runCode({apiKey: 'lc_pk_test', apiHost: 'https://capture.lucidace.com', eventName: 'order_completed', forwardAll: false, sendIp: true, extraProps: [{name: 'plan', value: 'pro'}]});
     assertApi('gtmOnSuccess').wasCalled();
 - name: An event without user_id or client_id fails the tag
   code: |-
     mock('getAllEventData', function() { return {event_name: 'x'}; });
-    runCode({apiKey: 'lc_pk_test', apiHost: 'https://ingest.lucida.dev'});
+    runCode({apiKey: 'lc_pk_test', apiHost: 'https://capture.lucidace.com'});
     assertApi('gtmOnFailure').wasCalled();
     assertApi('sendHttpRequest').wasNotCalled();
 

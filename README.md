@@ -4,6 +4,8 @@
 
 ## Install
 
+From GitHub, [lucidaanalytics/lucida-gtm](https://github.com/lucidaanalytics/lucida-gtm), release `v0.1.0`: download `lucida-gtm-v0.1.0.zip` from the [release page](https://github.com/lucidaanalytics/lucida-gtm/releases/tag/v0.1.0) and unzip it to get `template.tpl`; the Community Template Gallery listing is separate.
+
 1. GTM workspace, Templates, Tag Templates, New, menu, Import, choose `template.tpl`, Save.
 2. Add a tag of type **Lucida**, tag type **Initialise**, with your public key (`lc_pk_...`).
    Trigger it on All Pages (or after your consent banner fires).
@@ -31,7 +33,7 @@ Do not put an email address into the user id unless you are entitled to.
 | --- | --- |
 | Project API key | `createClient(key, ...)` (public key only) |
 | Ingest host | `apiHost` |
-| Snippet URL | script injected with `injectScript` (default `https://cdn.lucida.dev/lucida.js`) |
+| Snippet URL | script injected with `injectScript` (default `https://lucidace.com/lucida.js`) |
 | Pageviews | `capturePageview`: `'history'`, `true` (initial only), `false` |
 | Persistence | `persistence`: `cookie`, `localStorage`, `memory` |
 | Autocapture, Respect DNT, Debug | `autocapture`, `consent.respectDnt`, `debug` |
@@ -46,7 +48,7 @@ GTM consent settings; Lucida itself writes no cookie or storage before consent w
 
 ## Permissions
 
-`inject_script` is limited to `https://cdn.lucida.dev/*` and `access_globals` to `lucidaQueue`.
+`inject_script` is limited to `https://lucidace.com/*` and `access_globals` to `lucidaQueue`.
 Self-hosting the snippet means editing the inject_script permission after import.
 
 ## Server container
